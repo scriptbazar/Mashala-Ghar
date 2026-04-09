@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sub: "Cormorant Garamond", serif;
+  --font-sans: "Lato", sans-serif;
+
+  --color-saffron: #FF6B00;
+  --color-turmeric: #F5A623;
+  --color-espresso: #1C0A00;
+  --color-cream: #FFF8F0;
+  --color-burgundy: #6B0F1A;
+  --color-gold: #D4AF37;
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-espresso font-sans selection:bg-saffron selection:text-white;
+    cursor: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .text-gradient-gold {
+    @apply bg-linear-to-r from-[#D4AF37] via-[#F5A623] to-[#D4AF37] bg-clip-text text-transparent;
+  }
+
+  .gold-foil {
+    background: linear-gradient(
+      45deg,
+      #d4af37 0%,
+      #f5a623 45%,
+      #fff8f0 50%,
+      #f5a623 55%,
+      #d4af37 100%
+    );
+    background-size: 200% 200%;
+    animation: shine 3s infinite linear;
+  }
+
+  .shimmer-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      45deg,
+      transparent 25%,
+      rgba(212, 175, 55, 0.4) 50%,
+      transparent 75%
+    );
+    background-size: 200% 200%;
+    animation: shine 2s infinite linear;
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  @keyframes shine {
+    0% { background-position: -100% -100%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  .grain {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200vh;
+    background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+    background-repeat: repeat;
+    animation: noise 0.2s infinite;
+    opacity: .05;
+    visibility: visible;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  @keyframes noise {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-espresso;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-saffron rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-turmeric;
+}
